@@ -3,6 +3,8 @@ package com.timboektoe.fluts.io.input;
 import javax.swing.*;
 import javax.swing.filechooser.FileSystemView;
 import java.io.File;
+import java.util.List;
+import java.util.Scanner;
 
 public class FileDataReader implements Reader {
     public static String selectFile() {
@@ -31,5 +33,10 @@ public class FileDataReader implements Reader {
 
     public boolean isNullOrEmpty(String str) {
         return str == null || str.isEmpty();
+    }
+
+    @Override
+    public List<List<Integer>> readAllSchuurs(Scanner scanner, int numberSchuurs) {
+        throw new IllegalArgumentException("Reqding from file will be developed with nex version!");
     }
 }

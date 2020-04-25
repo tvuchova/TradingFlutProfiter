@@ -10,17 +10,6 @@ public class ConsoleOutputResult implements OutputResult {
         System.out.print(p + " ");
     }
 
-    /*public void printMaxProfitResults(Integer schuurs, Integer maxProfit, Set<Integer> positions) {
-        //  profitResults.forEach(result -> {
-        System.out.printf("schuurs %d\n", schuurs);
-        System.out.printf("Maximum profit is %d.\n", maxProfit);
-        System.out.print("Number of fluts to buy: ");
-        positions.forEach(ConsoleOutputResult::printPosition);
-        System.out.println();
-        // });
-
-    }*/
-
     public void printMaxProfitResult(List<ProfitResult> profitResults) {
         profitResults.forEach(result -> {
             System.out.printf("schuurs %d\n", result.getSchuuleNumber());
@@ -29,6 +18,5 @@ public class ConsoleOutputResult implements OutputResult {
             result.getOrderOfFlutsToBuy().forEach(ConsoleOutputResult::printPosition);
             System.out.println();
         });
-
     }
 }

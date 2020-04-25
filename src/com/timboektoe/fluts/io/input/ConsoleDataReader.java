@@ -3,7 +3,7 @@ package com.timboektoe.fluts.io.input;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class ConsoleDataReader {
+public class ConsoleDataReader implements Reader{
     public List<List<Integer>> readAllSchuurs(Scanner scanner, int numberSchuurs) {
         List<List<Integer>> pricePilesTable = new ArrayList<>();
 

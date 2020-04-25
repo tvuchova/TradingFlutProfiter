@@ -23,8 +23,6 @@ public class ProfitsCombinator {
             flutNumbers = combineAllPositions(positions);
         }
 
-        //output.printMaxProfitResults(schuuleCount, maxProfit, flutNumbers);
-
         return new ProfitResult(schuuleCount, maxProfit, flutNumbers);
     }
 
@@ -34,7 +32,7 @@ public class ProfitsCombinator {
                 return true;
             }
         }
-        return  false;
+        return false;
     }
 
     Integer findMaxValue(List<Integer> flutsList) {

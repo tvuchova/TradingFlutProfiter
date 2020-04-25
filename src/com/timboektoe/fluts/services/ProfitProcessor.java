@@ -20,8 +20,7 @@ public class ProfitProcessor {
 
     public List<Integer> processPile(List<Integer> flutsList) {
         List<Integer> profits = new ArrayList<>();
-        //flutsList.get(0) validaion with size
-        //if (flutsList.get(0) != flutsList.size()) throw new ValidationException("Invalid input")
+
         for (int i = 1; i < flutsList.size(); i++) {
             if (i != 1) {
                 profits.add(FlutParameters.SELLING_PRICE.getNumber() - flutsList.get(i) + profits.get(i - 2));

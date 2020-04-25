@@ -15,7 +15,6 @@ public class ProfitResult {
         this.orderOfFlutsToBuy = orderOfFlutsToBuy;
     }
 
-
     public Integer getSchuuleNumber() {
         return schuuleNumber;
     }
