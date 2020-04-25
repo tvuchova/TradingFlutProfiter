@@ -1,10 +1,10 @@
-package com.timboektoe.fluts.services;
+package com.timboektoe.fluts.io.input;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileSystemView;
 import java.io.File;
 
-public class FolderService {
+public class FileDataReader implements Reader {
     public static String selectFile() {
         JFileChooser jfc = new JFileChooser(
                 FileSystemView.getFileSystemView().getHomeDirectory());
@@ -18,5 +18,18 @@ public class FolderService {
         }
 
         return null;
+    }
+
+    public String chooseFile() {
+        String fileName = selectFile();
+        if (!isNullOrEmpty(fileName)) {
+            return fileName;
+        }
+        fileName = "flutsInput.txt";
+        return fileName;
+    }
+
+    public boolean isNullOrEmpty(String str) {
+        return str == null || str.isEmpty();
     }
 }

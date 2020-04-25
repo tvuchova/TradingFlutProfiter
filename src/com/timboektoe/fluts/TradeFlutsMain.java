@@ -1,45 +1,43 @@
 package com.timboektoe.fluts;
 
-import com.timboektoe.fluts.services.FolderService;
+import com.timboektoe.fluts.io.input.ConsoleDataReader;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.nio.charset.Charset;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
+import com.timboektoe.fluts.io.output.ConsoleOutputResult;
+import com.timboektoe.fluts.io.output.OutputResult;
+import com.timboektoe.fluts.model.ProfitResult;
+import com.timboektoe.fluts.services.ProfitProcessor;
+import com.timboektoe.fluts.services.ProfitsCombinator;
+
+
+import java.util.*;
+import java.util.concurrent.CompletableFuture;
+
 
 public class TradeFlutsMain {
+    private static final String END_OF_INPUT = "0";
 
     public static void main(String[] args) {
+        ConsoleDataReader consoleDataReader = new ConsoleDataReader();
+        ProfitsCombinator processor = new ProfitsCombinator();
+        ProfitProcessor profit = new ProfitProcessor();
+        OutputResult output = new ConsoleOutputResult();
 
-        String fileName = FolderService.selectFile();
-        if (fileName == null || fileName.isEmpty()) {
-            fileName = "flutsInput.txt";
+        System.out.println("Please enter input test cases");
+        try (Scanner scanner = new Scanner(System.in)) {
+            String line = scanner.nextLine();
+            List<CompletableFuture<ProfitResult>> completableFutures = new ArrayList<>();
+            while (!line.equals(END_OF_INPUT)) {
+                int numberOfSchuurs = Integer.parseInt(line);
+                List<List<Integer>> priceFlutsTable = consoleDataReader.readAllSchuurs(scanner, numberOfSchuurs);
+
+                CompletableFuture<ProfitResult> profitResultCompletableFuture = CompletableFuture.supplyAsync(() -> processor.combineAllPilesInSchuurs(priceFlutsTable, numberOfSchuurs));
+                completableFutures.add(profitResultCompletableFuture);
+
+                line = scanner.nextLine();
+            }
+            CompletableFuture<List<ProfitResult>> listCompletableFuture = profit.allOf(completableFutures);
+            List<ProfitResult> profitResultsList = listCompletableFuture.join();
+            output.printMaxProfitResult(profitResultsList);
         }
-
-        try (BufferedReader reader = Files.newBufferedReader(Paths.get(fileName), Charset.forName("UTF-8"))) {
-            reader.readLine();
-            //fileWorkerService.splitEmployeesByProject(DATE_FORMAT, projectsMap, reader);
-
-           // HashMap<EmployeesPair, Long> employeesPairMap = new HashMap<>();
-          //  fileWorkerService.combineEmployeePairsByWorkingTime(projectsMap, employeesPairMap);
-
-            printingResult(/*employeesPairMap*/);
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-    private static void printingResult(/*HashMap<EmployeesPair, Long> employeesPairMap*/) {
-       /* Optional<Map.Entry<EmployeesPair, Long>> first = employeesPairMap.entrySet().stream()
-                .min((k1, k2) -> -k1.getValue().compareTo(k2.getValue()));
-        if (first.isPresent()) {
-            System.out.println("RESULT PAIR IS :" + first.get().getKey() + " with longest period : " + first.get().getValue());
-        } else {
-            System.out.println("Cannot retrieve longest period.Please upload correct file!");
-        }*/
     }
 }
