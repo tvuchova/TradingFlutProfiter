@@ -1,5 +1,6 @@
 package com.timboektoe.fluts.services;
 
+import com.timboektoe.fluts.FlutParameters;
 import com.timboektoe.fluts.model.ProfitResult;
 
 import java.util.*;
@@ -56,7 +57,7 @@ public class ProfitsCombinator {
         for (List<Integer> list : combs) {
             count += 1;
             result.add(list.stream().reduce(0, Integer::sum));
-            if (count > 10) return result;
+            if (count > FlutParameters.MAX_NUMBER_TO_SHOW.getNumber()) return result;
         }
 
         return result;
@@ -67,8 +68,7 @@ public class ProfitsCombinator {
         Set<List<T>> newCombinations;
 
         int index = 0;
-        // extract each of the integers in the first list
-        // and add each to ints as a new list
+        // extract each of the integers in the first list and add each to ints as a new list
         for (T i : lists.get(0)) {
             List<T> newList = new ArrayList<>();
             newList.add(i);

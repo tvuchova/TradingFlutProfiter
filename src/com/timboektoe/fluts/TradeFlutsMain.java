@@ -27,10 +27,12 @@ public class TradeFlutsMain {
             String line = scanner.nextLine();
             List<CompletableFuture<ProfitResult>> completableFutures = new ArrayList<>();
             while (!line.equals(END_OF_INPUT)) {
+
                 int numberOfSchuurs = Integer.parseInt(line);
                 List<List<Integer>> priceFlutsTable = consoleDataReader.readAllSchuurs(scanner, numberOfSchuurs);
 
-                CompletableFuture<ProfitResult> profitResultCompletableFuture = CompletableFuture.supplyAsync(() -> processor.combineAllPilesInSchuurs(priceFlutsTable, numberOfSchuurs));
+                CompletableFuture<ProfitResult> profitResultCompletableFuture = CompletableFuture.supplyAsync(() ->
+                        processor.combineAllPilesInSchuurs(priceFlutsTable, numberOfSchuurs));
                 completableFutures.add(profitResultCompletableFuture);
 
                 line = scanner.nextLine();
