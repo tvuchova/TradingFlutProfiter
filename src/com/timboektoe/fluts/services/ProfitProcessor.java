@@ -31,6 +31,4 @@ public class ProfitProcessor {
 
         return profits;
     }
-
-
 }

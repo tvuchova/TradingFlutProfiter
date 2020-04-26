@@ -2,7 +2,7 @@ package com.timboektoe.fluts.model;
 
 import java.util.Set;
 
-public class ProfitResult {
+public final class ProfitResult {
     private final Integer schuuleNumber;
 
     private final Integer maxProfit;
