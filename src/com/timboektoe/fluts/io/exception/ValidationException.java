@@ -1,4 +1,4 @@
-package com.timboektoe.fluts;
+package com.timboektoe.fluts.io.exception;
 
 public class ValidationException  extends RuntimeException{
 

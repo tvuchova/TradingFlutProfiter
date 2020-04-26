@@ -3,9 +3,9 @@ Calculates maximum profit  **Trader**.
 
 
 ### Screenshots
-Sample           |   Colored
-:---------------------:|:-----------------
-![Result Trader](docs/Capture.PNG) | ![Result Trader](docs/Capture.PNG)
+Sample           |
+:---------------------:
+![Result Trader](docs/Capture.PNG) 
 
 ### Requirements 🔧
 * Java version 8 or higher.
